@@ -44,7 +44,8 @@
 
     .eyebrow{color:var(--brand-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem}
     h1{font-size:clamp(30px,4.6vw,50px);line-height:1.08;margin:.35em 0 .25em}
-    .sub{color:var(--muted);font-size:1.06rem;max-width:900px}
+    .site-title{font-size:clamp(40px,5.8vw,64px);line-height:1.04;margin:.05em 0 .15em;letter-spacing:-.005em}
+    .sub{color:var(--muted);font-size:1.15rem;max-width:900px;font-weight:700}
 
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
     .btn{background:linear-gradient(180deg,#79bbff,#58a8ff);color:#041018;border:0;padding:13px 18px;border-radius:14px;font-weight:800;letter-spacing:.01em}
@@ -54,6 +55,7 @@
     .hero-art{position:relative;min-height:260px;border-radius:18px;background:conic-gradient(from 180deg at 50% 50%, rgba(90,179,255,.28), rgba(88,228,198,.22), rgba(90,179,255,.28));
       display:grid;place-items:center;border:1px solid var(--line)}
     .hero-art svg{width:86%;height:auto;opacity:.9;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
+    .hero-art img{width:82%;height:auto;display:block;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
 
     /* Decorative grid overlay */
     .hero-shell:before{content:"";position:absolute;inset:0;background:
@@ -83,12 +85,13 @@
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     @media (max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
     .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
-    .kpi b{font-size:1.5rem}
+    .kpi b{font-size:1.5rem;letter-spacing:-.01em;word-spacing:-.02em}
+    .kpi b.stacked{display:block;line-height:1.05;letter-spacing:0;word-spacing:0}
 
     /* Lead magnet */
     .leadbox{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
     @media (max-width:980px){.leadbox{grid-template-columns:1fr}}
-    input,select,textarea{width:100%;background:#0c121a;border:1px solid var(--line);color:var(--ink);padding:12px;border-radius:10px}
+    input,select,textarea{width:100%;background:#0c121a;border:1px solid var(--line);color:var(--ink);padding:12px;border-radius:10px;box-sizing:border-box}
     label{font-weight:650;font-size:.92rem}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media (max-width:700px){.form-grid{grid-template-columns:1fr}}
@@ -109,7 +112,30 @@
     th{background:#0e1520;text-align:left}
     .tag{font-size:.82rem;color:var(--muted)}
     .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-  </style>
+    /* Lead magnet form spacing override */
+    #lead .form-grid{grid-template-columns:1fr;gap:20px}
+    #lead .form-grid p{margin:0}
+    #lead label{display:block;margin-bottom:6px}
+    #lead input{padding:14px}
+.list.roomy li{margin-bottom:12px}
+    .list.roomy li:last-child{margin-bottom:0}
+  /* Lead disclaimer spacing (no line breaks) */
+    #lead form .tag{display:block;margin-top:16px;line-height:1.5}
+  /* Align buttons in Writing cards */
+    #writing .cards .card{display:flex;flex-direction:column}
+    #writing .cards .card p:last-child{margin-top:auto}
+  /* Podcast card button spacing */
+    #about aside.panel .cta-guest{display:inline-block;margin-top:14px}
+  /* Contact form spacing */
+    #contact .form-grid{grid-template-columns:1fr 1fr;gap:32px}
+    #contact .form-grid p{margin:0}
+    #contact label{display:block;margin-bottom:6px}
+    #contact input,#contact select{padding:12px}
+  /* Keep contact fields side-by-side on desktop, stacked on mobile */
+    @media (max-width:700px){#contact .form-grid{grid-template-columns:1fr}}
+  /* Contact: larger primary send button, no secondary */
+    #contact .cta .btn{padding:16px 24px;min-width:180px;font-size:1rem}
+</style>
   <!-- JSON-LD basic schema for Person/Organization -->
   <script type="application/ld+json">
   {
@@ -117,10 +143,9 @@
     "@type": "Person",
     "name": "Alex Burton",
     "jobTitle": "Microsoft Licensing Specialist",
-    "url": "https://modernworkmindset.com/",
+    "url": "https://www.modernworkmindset.com/",
     "sameAs": [
-      "https://www.linkedin.com/in/davidalexanderburton",
-      "https://www.youtube.com/@GeekOfAllTrades"
+      "https://www.linkedin.com/in/davidalexanderburton"
     ],
     "worksFor": {
       "@type": "Organization",
@@ -134,42 +159,18 @@
     <div class="hero-shell">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow">Modern Work Mindset</div>
-          <h1>I help IT leaders untangle Microsoft licensing, activate M365, and raise security posture—without fluff.</h1>
-          <p class="sub">Microsoft Licensing Jedi • M365 Educator • Public Speaker. Field‑tested guidance for licensing clarity, adoption playbooks, and environment‑based security uplift.</p>
+          <h1 class="site-title">Modern Work Mindset</h1>
+          <p class="sub">Helping IT Leaders Make Microsoft Simple</p>
           <div class="cta">
             <a class="btn" href="#contact">Work With Me</a>
             <a class="btn sec" href="#lead">Get the 12‑point baseline</a>
           </div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <!-- Simple inline SVG illustration (swappable later with a banner image) -->
-          <svg viewBox="0 0 900 640" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#6ab3ff" stop-opacity=".95"/>
-                <stop offset="1" stop-color="#58e4c6" stop-opacity=".95"/>
-              </linearGradient>
-            </defs>
-            <rect x="60" y="70" width="780" height="500" rx="26" stroke="url(#g1)" stroke-width="3"/>
-            <rect x="120" y="130" width="660" height="380" rx="18" fill="#0b1220" stroke="#223044"/>
-            <g opacity=".95">
-              <path d="M160 180h220v28H160zM160 228h160v28H160z" fill="url(#g1)"/>
-              <rect x="160" y="290" width="260" height="180" rx="12" fill="#0f1828" stroke="#223044"/>
-              <rect x="460" y="290" width="220" height="52" rx="10" fill="#0f1828" stroke="#223044"/>
-              <rect x="460" y="358" width="220" height="52" rx="10" fill="#0f1828" stroke="#223044"/>
-              <rect x="460" y="426" width="220" height="44" rx="10" fill="#0f1828" stroke="#223044"/>
-              <circle cx="300" cy="380" r="64" stroke="url(#g1)" stroke-width="3" fill="#0c1526"/>
-              <path d="M270 382l24 24 40-44" stroke="#6ab3ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-          </svg>
+        <div class="hero-art" aria-hidden="false">
+          <!-- Replace the src below with your actual logo path in WordPress: Media → Upload → copy file URL -->
+          <img src="https://github.com/modernworkmindset/modernworkmindset.github.io/blob/main/assets/img/MWM_Logo.png" alt="Modern Work Mindset logo" />
         </div>
       </div>
-    </div>
-
-    <!-- Optional banner slot below hero (replace with an <img> if desired) -->
-    <div class="media-banner wrap" style="padding:0;margin-top:18px">
-      <div class="ph"></div>
     </div>
   </header>
 
@@ -193,7 +194,7 @@
       <article class="card">
         <span class="badge">Adoption</span>
         <h3>M365 Adoption Accelerator</h3>
-        <p class="mini">30/60/90 rollout checklist and enablement without user drama.</p>
+        <p class="mini">Ship the right features in 30/60/90‑day sprints—with clear owners, change comms, and guardrails. No fire drills.</p>
         <ul class="list">
           <li>Role-based rollout plan</li>
           <li>Change & comms templates</li>
@@ -221,14 +222,14 @@
       <div class="panel">
         <h2>Proof & Outcomes</h2>
         <div class="kpis">
-          <div class="kpi"><b>$128k</b><div class="tag">redundant SKUs removed</div></div>
-          <div class="kpi"><b>37 → 71</b><div class="tag">Secure Score in 6 weeks</div></div>
-          <div class="kpi"><b>30/60/90</b><div class="tag">adoption plan shipped</div></div>
+          <div class="kpi"><b>$25k</b><div class="tag">annualized licensing savings</div></div>
+          <div class="kpi"><b>37% → 71%</b><div class="tag">Secure Score baseline in 6 weeks</div></div>
+          <div class="kpi"><b class="stacked">Adoption<br>Score<br>targeting</b><div class="tag">train where it matters</div></div>
         </div>
-        <ul class="list">
-          <li><b>Case A:</b> Consolidated E3/E5 mix; enabled Defender for O365; simplified renewals.</li>
-          <li><b>Case B:</b> Activated DLP & conditional access with zero helpdesk spike.</li>
-          <li><b>Case C:</b> Cut shadow IT by standardizing Teams/SharePoint patterns.</li>
+        <ul class="list roomy">
+          <li><b>Cost optimization:</b> Consolidated Business Premium/E3/E5 mix, removed overlap, and aligned add‑ons to roles: about $25k in annual savings.</li>
+          <li><b>Risk reduction:</b> Enabled DLP, enforced MFA, and baseline Conditional Access: closed high‑risk gaps with no helpdesk spike.</li>
+          <li><b>Efficiency:</b> Used Microsoft Adoption Score to pinpoint low‑usage areas and focus training where it matters: faster adoption and fewer handoffs.</li>
         </ul>
       </div>
 
@@ -239,24 +240,12 @@
         <div class="leadbox">
           <form method="post" action="#" onsubmit="alert('Thanks! (Wire this to your email/signup provider)');return false;">
             <div class="form-grid">
-              <p><label for="name">Name</label><br><input id="name" name="name" required></p>
-              <p><label for="email">Work Email</label><br><input id="email" name="email" type="email" required></p>
+              <p><label for="name">Name</label><input id="name" name="name" required></p>
+              <p><label for="email">Work Email</label><input id="email" name="email" type="email" required></p>
             </div>
             <p><button class="btn" type="submit">Email me the PDF</button></p>
             <p class="tag">By submitting, you’ll also get the Modern Work Mindset newsletter (1×/month). Unsubscribe anytime.</p>
-          </form>
-          <div class="card">
-            <h3 class="mono">Checklist preview</h3>
-            <table>
-              <tr><th>#</th><th>Check</th></tr>
-              <tr><td>1</td><td>Backups: Exchange/SharePoint/OneDrive covered?</td></tr>
-              <tr><td>2</td><td>Domains & SPF/DKIM/DMARC configured?</td></tr>
-              <tr><td>3</td><td>Conditional Access base policies on?</td></tr>
-              <tr><td>4</td><td>Intune device compliance rules defined?</td></tr>
-              <tr><td>5</td><td>DLP policies scoped & tested?</td></tr>
-            </table>
-          </div>
-        </div>
+          </form></div>
       </div>
     </div>
   </section>
@@ -265,19 +254,19 @@
     <h2>Speaking & Workshops</h2>
     <div class="cards">
       <article class="card">
-        <h3>Licensing Myths that Cost Real Money</h3>
-        <p class="mini">Board‑level clarity on E3/E5 tradeoffs, add‑ons, and avoiding double‑spend.</p>
+        <h3>Make Microsoft Make Sense</h3>
+        <p class="mini">A practical briefing mapping Business Premium, E3, and E5 to clear business results.</p>
       </article>
       <article class="card">
-        <h3>Copilot Without Chaos</h3>
-        <p class="mini">Data hygiene, governance, and value tracking—so AI helps, not harms.</p>
+        <h3>AI Readiness for M365</h3>
+        <p class="mini">A plain‑English game plan to get your tenant AI‑ready.</p>
       </article>
       <article class="card">
         <h3>Adoption Quick Wins by Role</h3>
         <p class="mini">Admin guardrails + change patterns that actually stick.</p>
       </article>
     </div>
-    <p class="cta"><a class="btn" href="https://calendly.com/your-calendly/intro" target="_blank" rel="noopener">Invite Alex to Speak</a></p>
+    <p class="cta"><a class="btn" href="#contact" target="_blank" rel="noopener">Invite Alex to Speak</a></p>
   </section>
 
   <section id="writing" class="wrap">
@@ -285,18 +274,18 @@
     <div class="cards">
       <article class="card">
         <h3>LinkedIn</h3>
-        <p class="mini">Latest posts pulled via embed or manual links.</p>
+        <p class="mini">Connect with me on LinkedIn to stay up to date on Microsoft changes and practical guidance.</p>
         <p><a class="btn sec" href="https://www.linkedin.com/in/davidalexanderburton" target="_blank" rel="noopener">View LinkedIn</a></p>
       </article>
       <article class="card">
-        <h3>Blogger</h3>
-        <p class="mini">Your deep dives and Patch Tuesday POVs.</p>
-        <p><a class="btn sec" href="https://www.blogger.com/" target="_blank" rel="noopener">Read on Blogger</a></p>
+        <h3>Articles / Blog</h3>
+        <p class="mini">Overviews and updates I find worth calling out. Clear summaries, practical takeaways.</p>
+        <p><a class="btn sec" href="https://modernworkmindset.blogspot.com/" target="_blank" rel="noopener">Explore articles</a></p>
       </article>
       <article class="card">
         <h3>Newsletter</h3>
-        <p class="mini">Modern Work Mindset—monthly, proof‑first guidance.</p>
-        <p><a class="btn sec" href="#lead">Subscribe</a></p>
+        <p class="mini">A monthly, plain‑English brief on Microsoft changes with proof‑first guidance and practical next steps.</p>
+        <p><a class="btn sec" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7379886911567458304">Subscribe</a></p>
       </article>
     </div>
   </section>
@@ -306,35 +295,33 @@
     <div class="two">
       <div class="panel">
         <p><b>Microsoft Licensing Jedi • M365 Educator • Partnership Manager (Logically)</b></p>
-        <p>I help IT leaders make confident decisions about Microsoft licensing, activate the right workloads in the right order, and uplift security based on the reality of your environment—not just SKUs. My background spans Technical Account Management, Solution Architecture, and Microsoft Partnership Management at MSPs.</p>
+        <p>I help IT leaders make confident decisions about Microsoft licensing, activate the right workloads in the right order, and uplift security based on the reality of your environment; not just SKUs. My background spans Technical Account Management, Solution Architecture, and Microsoft Partnership Management at MSPs.</p>
         <ul class="list">
           <li>Specialties: Licensing clarity, adoption playbooks, Copilot readiness, security posture.</li>
           <li>Format: Briefs, workshops, exec education, and hands‑on rollout patterns.</li>
         </ul>
       </div>
       <aside class="panel">
-        <h3>Links</h3>
-        <ul class="list">
-          <li><a href="https://www.linkedin.com/in/davidalexanderburton" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Newsletter</a></li>
-          <li><a href="#" target="_blank" rel="noopener">Blogger</a></li>
-        </ul>
-        <h3 class="" style="margin-top:1em">Podcast (coming soon)</h3>
-        <p class="mini">Interviews with IT leaders on Microsoft and disruptive tech. <a href="#contact">Suggest a guest</a>.</p>
+        <h3>Podcast (coming soon)</h3>
+        <p class="mini">Conversations with IT leaders on Microsoft and disruptive tech. Suggest a guest or topic.</p>
+        <p><a class="btn cta-guest" href="#contact">Suggest a guest</a></p>
+      
       </aside>
+    </div>
+  </section>
     </div>
   </section>
 
   <section id="contact" class="wrap">
-    <h2>Contact / Hire Me</h2>
+    <h2>Contact</h2>
     <div class="two">
       <div class="panel">
         <form method="post" action="#" onsubmit="alert('Thanks! Replace this with your WordPress form plugin or backend.');return false;">
           <div class="form-grid">
-            <p><label for="cname">Name</label><br><input id="cname" name="cname" required></p>
-            <p><label for="cemail">Work Email</label><br><input id="cemail" name="cemail" type="email" required></p>
-            <p><label for="ccompany">Company</label><br><input id="ccompany" name="ccompany"></p>
-            <p><label for="csize">Company Size</label><br>
+            <p><label for="cname">Name</label><input id="cname" name="cname" required></p>
+            <p><label for="cemail">Work Email</label><input id="cemail" name="cemail" type="email" required></p>
+            <p><label for="ccompany">Company</label><input id="ccompany" name="ccompany"></p>
+            <p><label for="csize">Company Size</label>
               <select id="csize" name="csize">
                 <option value="1-49">1–49</option>
                 <option value="50-249">50–249</option>
@@ -343,27 +330,27 @@
               </select>
             </p>
           </div>
-          <p><label for="cneed">Primary challenge</label><br><textarea id="cneed" name="cneed" rows="4" placeholder="Licensing sanity check, adoption quick wins, secure score uplift…"></textarea></p>
+          <p><label for="cneed">Primary challenge</label><textarea id="cneed" name="cneed" rows="4" placeholder="Licensing sanity check, adoption quick wins, secure score uplift…"></textarea></p>
           <p class="cta">
             <button class="btn" type="submit">Send</button>
-            <a class="btn sec" href="https://calendly.com/your-calendly/intro" target="_blank" rel="noopener">Choose a slot</a>
+            
           </p>
         </form>
       </div>
       <aside class="panel">
         <h3>FAQs</h3>
-        <ul class="list">
-          <li><b>Do you publish pricing?</b> I provide ranges for common packages and fix fees after a short discovery.</li>
-          <li><b>Do you work with MSPs?</b> Yes—co‑sell and white‑label options available.</li>
-          <li><b>Security stance?</b> Least privilege, auditability, and proof‑first changes.</li>
+        <ul class="list roomy">
+          <li><b>What is Modern Work Mindset?</b> A Microsoft-focused practice that turns licensing and services into clear, repeatable outcomes.</li>
+          <li><b>What makes you different?</b> Plain-English guidance, proof-first playbooks, and artifacts your team can run without me.</li>
+          <li><b>How do you measure success?</b> Before/after metrics tied to adoption, security posture, support tickets, and time-to-ready.</li>
+          <li><b>How do we get started?</b> Book a short intro call, align on goals, and pick the fastest path to a measurable win.</li>
         </ul>
       </aside>
     </div>
   </section>
 
   <footer class="wrap footer">
-    <div>© <span id="y"></span> Modern Work Mindset • Austin, TX • <a href="mailto:hello@modernworkmindset.com">hello@modernworkmindset.com</a></div>
-    <div class="tag">Privacy‑respecting site. No tracking cookies beyond basic analytics you configure in WordPress.</div>
+    <div>© <span id="y"></span> Modern Work Mindset • Chicago, IL • <a href="mailto:alex@modernworkmindset.com">alex@modernworkmindset.com</a></div>
   </footer>
 
   <script>
