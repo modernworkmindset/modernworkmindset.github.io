@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Work Mindset • Microsoft Licensing Jedi • M365 Educator</title>
+  <meta name="description" content="I help IT leaders untangle Microsoft licensing, activate M365 workloads, and raise security posture—without fluff." />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root{
+      --bg:#0b0f14;          /* deep slate */
+      --panel:#0f151f;       /* cards */
+      --soft:#121a26;        /* panel alt */
+      --ink:#eef3fb;         /* text */
+      --muted:#a7b1c0;       /* secondary text */
+      --brand:#6ab3ff;       /* accent */
+      --brand-2:#58e4c6;     /* secondary accent */
+      --line:#233042;
+      --ok:#40d7a4;
+      --warn:#ffb24a;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1180px;
+      --space: 28px;
+    }
+    html,body{background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,Segoe UI,Inter,Roboto,Helvetica,Arial,sans-serif;margin:0}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{opacity:.95}
+
+    /* Layout */
+    .wrap{max-width:var(--max);margin:auto;padding:calc(var(--space) * 1.25) var(--space)}
+    section{scroll-margin-top:90px}
+
+    /* HERO */
+    .hero-shell{position:relative;isolation:isolate;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:
+      radial-gradient(1200px 500px at 90% -10%, rgba(90,179,255,.22), transparent 60%),
+      radial-gradient(900px 400px at -10% 10%, rgba(88,228,198,.18), transparent 60%),
+      linear-gradient(180deg, #0c121a 0%, #0c121a 60%, #0b0f14 100%);
+      border:1px solid var(--line);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center;padding:64px 42px}
+    @media (max-width: 980px){.hero-grid{grid-template-columns:1fr;gap:20px;padding:42px 26px}}
+
+    .eyebrow{color:var(--brand-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem}
+    h1{font-size:clamp(30px,4.6vw,50px);line-height:1.08;margin:.35em 0 .25em}
+    .sub{color:var(--muted);font-size:1.06rem;max-width:900px}
+
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .btn{background:linear-gradient(180deg,#79bbff,#58a8ff);color:#041018;border:0;padding:13px 18px;border-radius:14px;font-weight:800;letter-spacing:.01em}
+    .btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+
+    /* Hero artwork */
+    .hero-art{position:relative;min-height:260px;border-radius:18px;background:conic-gradient(from 180deg at 50% 50%, rgba(90,179,255,.28), rgba(88,228,198,.22), rgba(90,179,255,.28));
+      display:grid;place-items:center;border:1px solid var(--line)}
+    .hero-art svg{width:86%;height:auto;opacity:.9;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
+
+    /* Decorative grid overlay */
+    .hero-shell:before{content:"";position:absolute;inset:0;background:
+      repeating-linear-gradient(90deg, transparent 0 48px, rgba(255,255,255,.03) 48px 49px),
+      repeating-linear-gradient(0deg, transparent 0 48px, rgba(255,255,255,.03) 48px 49px);
+      mix-blend-mode:overlay;pointer-events:none}
+
+    /* Sections */
+    .stripe{background:linear-gradient(90deg,rgba(90,160,255,.22),rgba(82,227,194,.18));height:1px;margin:44px 0;border:0}
+    h2{font-size:clamp(22px,2.2vw,28px);margin:0 0 14px}
+    .section-lead{color:var(--muted);margin:-2px 0 18px}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .card h3{margin:.2em 0 .6em;font-size:1.1rem}
+    .mini{color:var(--muted);font-size:.98rem}
+    .list{padding-left:18px;margin:.4em 0}
+    .badge{display:inline-block;background:rgba(90,160,255,.12);border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-size:.8rem;color:var(--ink)}
+
+    /* Two-col */
+    .two{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+    @media (max-width: 980px){.two{grid-template-columns:1fr}}
+
+    /* Panels & KPI */
+    .panel{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:700px){.kpis{grid-template-columns:1fr 1fr}}
+    .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+    .kpi b{font-size:1.5rem}
+
+    /* Lead magnet */
+    .leadbox{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
+    @media (max-width:980px){.leadbox{grid-template-columns:1fr}}
+    input,select,textarea{width:100%;background:#0c121a;border:1px solid var(--line);color:var(--ink);padding:12px;border-radius:10px}
+    label{font-weight:650;font-size:.92rem}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:700px){.form-grid{grid-template-columns:1fr}}
+
+    /* Media banner (optional image) */
+    .media-banner{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#0c121a;box-shadow:var(--shadow)}
+    .media-banner .ph{aspect-ratio:16/9;display:block;background:
+        linear-gradient(135deg, rgba(90,179,255,.18), rgba(88,228,198,.12)),
+        radial-gradient(800px 400px at 20% 0%, rgba(255,255,255,.06), transparent 50%);
+    }
+
+    /* Footer */
+    .footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0;color:var(--muted);font-size:.92rem}
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid var(--line);padding:10px}
+    th{background:#0e1520;text-align:left}
+    .tag{font-size:.82rem;color:var(--muted)}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  </style>
+  <!-- JSON-LD basic schema for Person/Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alex Burton",
+    "jobTitle": "Microsoft Licensing Specialist",
+    "url": "https://modernworkmindset.com/",
+    "sameAs": [
+      "https://www.linkedin.com/in/davidalexanderburton",
+      "https://www.youtube.com/@GeekOfAllTrades"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Modern Work Mindset"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="wrap">
+    <div class="hero-shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Modern Work Mindset</div>
+          <h1>I help IT leaders untangle Microsoft licensing, activate M365, and raise security posture—without fluff.</h1>
+          <p class="sub">Microsoft Licensing Jedi • M365 Educator • Public Speaker. Field‑tested guidance for licensing clarity, adoption playbooks, and environment‑based security uplift.</p>
+          <div class="cta">
+            <a class="btn" href="#contact">Work With Me</a>
+            <a class="btn sec" href="#lead">Get the 12‑point baseline</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <!-- Simple inline SVG illustration (swappable later with a banner image) -->
+          <svg viewBox="0 0 900 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6ab3ff" stop-opacity=".95"/>
+                <stop offset="1" stop-color="#58e4c6" stop-opacity=".95"/>
+              </linearGradient>
+            </defs>
+            <rect x="60" y="70" width="780" height="500" rx="26" stroke="url(#g1)" stroke-width="3"/>
+            <rect x="120" y="130" width="660" height="380" rx="18" fill="#0b1220" stroke="#223044"/>
+            <g opacity=".95">
+              <path d="M160 180h220v28H160zM160 228h160v28H160z" fill="url(#g1)"/>
+              <rect x="160" y="290" width="260" height="180" rx="12" fill="#0f1828" stroke="#223044"/>
+              <rect x="460" y="290" width="220" height="52" rx="10" fill="#0f1828" stroke="#223044"/>
+              <rect x="460" y="358" width="220" height="52" rx="10" fill="#0f1828" stroke="#223044"/>
+              <rect x="460" y="426" width="220" height="44" rx="10" fill="#0f1828" stroke="#223044"/>
+              <circle cx="300" cy="380" r="64" stroke="url(#g1)" stroke-width="3" fill="#0c1526"/>
+              <path d="M270 382l24 24 40-44" stroke="#6ab3ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional banner slot below hero (replace with an <img> if desired) -->
+    <div class="media-banner wrap" style="padding:0;margin-top:18px">
+      <div class="ph"></div>
+    </div>
+  </header>
+
+  <hr class="stripe" />
+
+  <!-- Services Snapshot -->
+  <section id="services" class="wrap">
+    <h2>Services</h2>
+    <div class="cards">
+      <article class="card">
+        <span class="badge">Licensing</span>
+        <h3>Licensing Clarity Review</h3>
+        <p class="mini">Find overlaps, right-size SKUs, and stop paying twice. Leave with a clear SKU map and savings plan.</p>
+        <ul class="list">
+          <li>SKU audit + usage analysis</li>
+          <li>Right-size recommendations</li>
+          <li>Executive-ready summary (PDF)</li>
+        </ul>
+        <p><a class="btn" href="#contact">Book intro call</a></p>
+      </article>
+      <article class="card">
+        <span class="badge">Adoption</span>
+        <h3>M365 Adoption Accelerator</h3>
+        <p class="mini">30/60/90 rollout checklist and enablement without user drama.</p>
+        <ul class="list">
+          <li>Role-based rollout plan</li>
+          <li>Change & comms templates</li>
+          <li>Admin guardrails + KPIs</li>
+        </ul>
+        <p><a class="btn" href="#contact">Start a rollout</a></p>
+      </article>
+      <article class="card">
+        <span class="badge">Security</span>
+        <h3>Environment‑Based Secure Score Workshop</h3>
+        <p class="mini">Baseline your real environment, prioritize fixes, and ship a 90‑day plan tied to risk.</p>
+        <ul class="list">
+          <li>Baseline & gap analysis</li>
+          <li>Prioritized remediation ladder</li>
+          <li>90‑day execution plan</li>
+        </ul>
+        <p><a class="btn" href="#contact">Run the workshop</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="two">
+      <!-- Proof & Outcomes -->
+      <div class="panel">
+        <h2>Proof & Outcomes</h2>
+        <div class="kpis">
+          <div class="kpi"><b>$128k</b><div class="tag">redundant SKUs removed</div></div>
+          <div class="kpi"><b>37 → 71</b><div class="tag">Secure Score in 6 weeks</div></div>
+          <div class="kpi"><b>30/60/90</b><div class="tag">adoption plan shipped</div></div>
+        </div>
+        <ul class="list">
+          <li><b>Case A:</b> Consolidated E3/E5 mix; enabled Defender for O365; simplified renewals.</li>
+          <li><b>Case B:</b> Activated DLP & conditional access with zero helpdesk spike.</li>
+          <li><b>Case C:</b> Cut shadow IT by standardizing Teams/SharePoint patterns.</li>
+        </ul>
+      </div>
+
+      <!-- Lead Magnet -->
+      <div id="lead" class="panel">
+        <h2>M365 Adoption Baseline: 12 Checks in 30 Minutes</h2>
+        <p class="mini">Grab the checklist I use with clients to find low‑effort, high‑impact wins before big rollouts.</p>
+        <div class="leadbox">
+          <form method="post" action="#" onsubmit="alert('Thanks! (Wire this to your email/signup provider)');return false;">
+            <div class="form-grid">
+              <p><label for="name">Name</label><br><input id="name" name="name" required></p>
+              <p><label for="email">Work Email</label><br><input id="email" name="email" type="email" required></p>
+            </div>
+            <p><button class="btn" type="submit">Email me the PDF</button></p>
+            <p class="tag">By submitting, you’ll also get the Modern Work Mindset newsletter (1×/month). Unsubscribe anytime.</p>
+          </form>
+          <div class="card">
+            <h3 class="mono">Checklist preview</h3>
+            <table>
+              <tr><th>#</th><th>Check</th></tr>
+              <tr><td>1</td><td>Backups: Exchange/SharePoint/OneDrive covered?</td></tr>
+              <tr><td>2</td><td>Domains & SPF/DKIM/DMARC configured?</td></tr>
+              <tr><td>3</td><td>Conditional Access base policies on?</td></tr>
+              <tr><td>4</td><td>Intune device compliance rules defined?</td></tr>
+              <tr><td>5</td><td>DLP policies scoped & tested?</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="speaking" class="wrap">
+    <h2>Speaking & Workshops</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Licensing Myths that Cost Real Money</h3>
+        <p class="mini">Board‑level clarity on E3/E5 tradeoffs, add‑ons, and avoiding double‑spend.</p>
+      </article>
+      <article class="card">
+        <h3>Copilot Without Chaos</h3>
+        <p class="mini">Data hygiene, governance, and value tracking—so AI helps, not harms.</p>
+      </article>
+      <article class="card">
+        <h3>Adoption Quick Wins by Role</h3>
+        <p class="mini">Admin guardrails + change patterns that actually stick.</p>
+      </article>
+    </div>
+    <p class="cta"><a class="btn" href="https://calendly.com/your-calendly/intro" target="_blank" rel="noopener">Invite Alex to Speak</a></p>
+  </section>
+
+  <section id="writing" class="wrap">
+    <h2>Writing & Updates</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>LinkedIn</h3>
+        <p class="mini">Latest posts pulled via embed or manual links.</p>
+        <p><a class="btn sec" href="https://www.linkedin.com/in/davidalexanderburton" target="_blank" rel="noopener">View LinkedIn</a></p>
+      </article>
+      <article class="card">
+        <h3>Blogger</h3>
+        <p class="mini">Your deep dives and Patch Tuesday POVs.</p>
+        <p><a class="btn sec" href="https://www.blogger.com/" target="_blank" rel="noopener">Read on Blogger</a></p>
+      </article>
+      <article class="card">
+        <h3>Newsletter</h3>
+        <p class="mini">Modern Work Mindset—monthly, proof‑first guidance.</p>
+        <p><a class="btn sec" href="#lead">Subscribe</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <h2>About Alex</h2>
+    <div class="two">
+      <div class="panel">
+        <p><b>Microsoft Licensing Jedi • M365 Educator • Partnership Manager (Logically)</b></p>
+        <p>I help IT leaders make confident decisions about Microsoft licensing, activate the right workloads in the right order, and uplift security based on the reality of your environment—not just SKUs. My background spans Technical Account Management, Solution Architecture, and Microsoft Partnership Management at MSPs.</p>
+        <ul class="list">
+          <li>Specialties: Licensing clarity, adoption playbooks, Copilot readiness, security posture.</li>
+          <li>Format: Briefs, workshops, exec education, and hands‑on rollout patterns.</li>
+        </ul>
+      </div>
+      <aside class="panel">
+        <h3>Links</h3>
+        <ul class="list">
+          <li><a href="https://www.linkedin.com/in/davidalexanderburton" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Newsletter</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Blogger</a></li>
+        </ul>
+        <h3 class="" style="margin-top:1em">Podcast (coming soon)</h3>
+        <p class="mini">Interviews with IT leaders on Microsoft and disruptive tech. <a href="#contact">Suggest a guest</a>.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <h2>Contact / Hire Me</h2>
+    <div class="two">
+      <div class="panel">
+        <form method="post" action="#" onsubmit="alert('Thanks! Replace this with your WordPress form plugin or backend.');return false;">
+          <div class="form-grid">
+            <p><label for="cname">Name</label><br><input id="cname" name="cname" required></p>
+            <p><label for="cemail">Work Email</label><br><input id="cemail" name="cemail" type="email" required></p>
+            <p><label for="ccompany">Company</label><br><input id="ccompany" name="ccompany"></p>
+            <p><label for="csize">Company Size</label><br>
+              <select id="csize" name="csize">
+                <option value="1-49">1–49</option>
+                <option value="50-249">50–249</option>
+                <option value="250-999">250–999</option>
+                <option value="1000+">1000+</option>
+              </select>
+            </p>
+          </div>
+          <p><label for="cneed">Primary challenge</label><br><textarea id="cneed" name="cneed" rows="4" placeholder="Licensing sanity check, adoption quick wins, secure score uplift…"></textarea></p>
+          <p class="cta">
+            <button class="btn" type="submit">Send</button>
+            <a class="btn sec" href="https://calendly.com/your-calendly/intro" target="_blank" rel="noopener">Choose a slot</a>
+          </p>
+        </form>
+      </div>
+      <aside class="panel">
+        <h3>FAQs</h3>
+        <ul class="list">
+          <li><b>Do you publish pricing?</b> I provide ranges for common packages and fix fees after a short discovery.</li>
+          <li><b>Do you work with MSPs?</b> Yes—co‑sell and white‑label options available.</li>
+          <li><b>Security stance?</b> Least privilege, auditability, and proof‑first changes.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="wrap footer">
+    <div>© <span id="y"></span> Modern Work Mindset • Austin, TX • <a href="mailto:hello@modernworkmindset.com">hello@modernworkmindset.com</a></div>
+    <div class="tag">Privacy‑respecting site. No tracking cookies beyond basic analytics you configure in WordPress.</div>
+  </footer>
+
+  <script>
+    // Year stamp
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!--
+  ========================
+  HOW TO USE IN WORDPRESS
+  ========================
+  1) Add a new Page (or edit Home) → add a "Custom HTML" block → paste this entire file.
+  2) Replace placeholder links (Calendly, Newsletter, Blogger) and numbers in Proof & Outcomes.
+  3) Swap the lead magnet form with your provider (Mailchimp, ConvertKit, WPForms, etc.).
+  4) Optional: create subpages /services, /speaking, /about by duplicating relevant sections.
+  5) Styling is self‑contained—plays nicely with most themes. If your theme overrides body font/colors,
+     wrap this file in a parent <div class="mwm"> and prefix selectors with .mwm.
+  -->
+</body>
+</html>
