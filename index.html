@@ -312,8 +312,11 @@
     <h2>Contact</h2>
     <div class="two">
       <div class="panel">
-        <!-- CONTACT FORM WIRED TO EMAILJS -->
-        <form onsubmit="sendEmail(event)">
+        <!-- CONTACT FORM — FormSubmit (AJAX, stays on-page) -->
+        <form id="contact-form"
+              action="https://formsubmit.co/alex@modernworkmindset.com"
+              method="POST"
+              novalidate>
           <div class="form-grid">
             <p><label for="cname">Name</label><input id="cname" name="cname" required></p>
             <p><label for="cemail">Work Email</label><input id="cemail" name="cemail" type="email" required></p>
@@ -330,12 +333,23 @@
           <p><label for="cneed">Primary challenge</label><textarea id="cneed" name="cneed" rows="4" placeholder="Licensing sanity check, adoption quick wins, secure score uplift…"></textarea></p>
 
           <!-- Honeypot -->
-          <input type="text" name="gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="MWM Contact">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Reply-To populated from visitor email in JS -->
+          <input type="hidden" name="_replyto" id="_replyto">
 
           <p class="cta">
-            <button class="btn" type="submit">Send</button>
+            <button class="btn" id="contact-submit" type="submit">Send</button>
           </p>
+
+          <!-- Inline status message -->
+          <p id="contact-status" class="mini" aria-live="polite"></p>
         </form>
+        <p class="tag">First-ever submit triggers a one-time confirmation email from FormSubmit. Approve it once and you’re set.</p>
       </div>
       <aside class="panel">
         <h3>FAQs</h3>
@@ -358,51 +372,49 @@
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 
-  <!-- EmailJS: drop-in email sending for the Contact form -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <!-- Contact form AJAX (FormSubmit) -->
   <script>
-    (function(){
-      // TODO: replace with your EmailJS Public Key (Account → API Keys)
-      emailjs.init("rVVTRf7efinS_Kls0");
-    })();
+    const form = document.getElementById("contact-form");
+    const btn  = document.getElementById("contact-submit");
+    const msg  = document.getElementById("contact-status");
 
-    async function sendEmail(e){
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const f = e.target;
-      if (f.gotcha && f.gotcha.value) return; // simple spam trap
+
+      // Set Reply-To from visitor email so replies go to them
+      const emailVal = (form.cemail?.value || "").trim();
+      document.getElementById("_replyto").value = emailVal;
+
+      // Basic honeypot check (_honey)
+      if (form._honey && form._honey.value) {
+        msg.textContent = "Spam detected.";
+        return;
+      }
+
+      btn.disabled = true;
+      msg.textContent = "Sending…";
 
       try {
-        const res = await emailjs.send(
-          "service_isqtqgh",     // your SMTP Service ID (Namecheap)
-          "template_9z4geq8",    // your EmailJS Template ID
-          {
-            // Using your exact field names (Option A)
-            cname:   f.cname?.value || "",
-            cemail:  f.cemail?.value || "",
-            ccompany:f.ccompany?.value || "",
-            csize:   f.csize?.value || "",
-            cneed:   f.cneed?.value || "",
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form)
+        });
 
-            // Friendly aliases too (Option B) in case your template uses these
-            name:          f.cname?.value || "",
-            email:         f.cemail?.value || "",
-            company:       f.ccompany?.value || "",
-            company_size:  f.csize?.value || "",
-            message:       f.cneed?.value || "",
-            reply_to:      f.cemail?.value || ""
-          }
-        );
-        if(res.status === 200){
-          alert("Thanks! Your message has been sent.");
-          f.reset();
-        }else{
-          alert("Hmm, something went wrong. Please email alex@modernworkmindset.com.");
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          throw new Error(text || "Unknown error");
         }
-      } catch(err){
-        console.error(err);
-        alert("Could not send right now—please email alex@modernworkmindset.com.");
+
+        msg.textContent = "Sent! Check your inbox.";
+        form.reset();
+      } catch (err) {
+        console.error("FormSubmit error:", err);
+        msg.textContent = "Email failed: " + (err.message || err);
+      } finally {
+        btn.disabled = false;
       }
-    }
+    });
   </script>
 </body>
 </html>
